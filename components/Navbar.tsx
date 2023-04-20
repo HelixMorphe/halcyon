@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Minimize } from "lucide-react";
 const Navbar = () => {
   return (

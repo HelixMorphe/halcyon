@@ -24,8 +24,12 @@ const Hero = () => {
           <Link href={"/app"}>
             <Button size={"lg"}>Get Started</Button>
           </Link>
-          <Button size={"lg"} variant={"subtle"}>
-            <LucideGithub />
+          <Button
+            className="flex items-center justify-center gap-2"
+            size={"lg"}
+            variant={"subtle"}
+          >
+            <LucideGithub className="" size={"18px"} />
             <p>Github</p>
           </Button>
         </div>
