@@ -9,7 +9,7 @@ const Navbar = () => {
           <p>Halcyon</p>
         </div>
 
-        <nav className="hidden md:flex items-center justify-center gap-6 text-sm font-[500] text-brand-600">
+        <nav className="hidden md:flex items-center justify-center gap-6 text-sm font-[500] text-slate-600">
           <p>Features</p>
           <p>Documentation</p>
           <p>Pricing</p>
