@@ -1,15 +1,20 @@
-import Dashboard from "@/components/App/Dashboard";
+import Dashboard from "@/components/Dashboard/Dashboard";
 import Navbar from "@/components/Navbar";
 import React from "react";
-
+import Main from "@/components/App/Main.jsx";
+import SectionWrapper from "@/components/App/SectionsWrapper";
 const App = () => {
   return (
     <div>
-      <div className="max-w-[1400px] m-auto">
-        <Navbar />
-      </div>
-      <div className="max-w-[1400px] m-auto mt-4 p-4">
-        <Dashboard />
+      <div className="max-w-[1400px] m-auto">{/* <Navbar /> */}</div>
+      <div className="flex">
+        {/* <div>Sidebar</div> */}
+        <div className="grid grid-cols-2 w-full h-screen overflow-auto">
+          <div className="p-10 bg-white">
+            <SectionWrapper />
+          </div>
+          <div>Preview</div>
+        </div>
       </div>
     </div>
   );
