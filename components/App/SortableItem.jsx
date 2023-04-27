@@ -17,7 +17,7 @@ export function SortableItem(props) {
       style={style}
       {...attributes}
       {...listeners}
-      className=" p-4 my-4 rounded-md bg-stone-100"
+      className="p-4 rounded-md bg-stone-100 border my-4"
     >
       {props.label}
     </div>
