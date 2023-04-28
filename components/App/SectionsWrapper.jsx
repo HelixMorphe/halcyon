@@ -134,16 +134,16 @@ function SortableItem({ id, label, component, activeId, minimise }) {
       style={style}
       className={`rounded-md my-4 bg-white ${
         activeId?.id === id ? "opacity-50" : ""
-      }`}
+      } ${show ? "shadow-sm" : ""}`}
     >
       <div className="flex justify-between items-center">
         <p
-          className="font-semibold text-lg w-full p-4 cursor-pointer"
+          className="font-semibold text-lg w-full py-4 px-8 cursor-pointer"
           onClick={reveal}
         >
           {label}
         </p>
-        <div className="flex items-center justify-center gap-2 p-4">
+        <div className="flex items-center justify-center gap-2 py-4 px-8">
           <button {...listeners} {...attributes}>
             <GripVertical className="opacity-5 hover:opacity-40 active:opacity-60" />
           </button>
