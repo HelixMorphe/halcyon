@@ -6,6 +6,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  DragOverlay,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -13,12 +14,18 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-
+import {
+  restrictToVerticalAxis,
+  restrictToWindowEdges,
+} from "@dnd-kit/modifiers";
 // import { SortableItem } from "./SortableItem";
-import { ArrowUpDown, ChevronDown } from "lucide-react";
+import { ArrowUpDown, ChevronDown, GripVertical } from "lucide-react";
 import autoAnimate from "@formkit/auto-animate";
 import Personal from "../Forms/Personal";
-const sections = [
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
+const SECTIONS = [
   {
     id: 1,
     label: "Personal Information",
@@ -35,8 +42,17 @@ const sections = [
     component: <Personal />,
   },
 ];
+
 export default function SectionWrapper() {
-  const [items, setItems] = useState(sections);
+  const [items, setItems] = useState(SECTIONS);
+  const [activeId, setActiveId] = useState(null);
+  const [minimise, setMinimise] = useState(true);
+  useEffect(() => {
+    console.log(minimise);
+  }, [minimise]);
+  useEffect(() => {
+    setMinimise(!Boolean(activeId));
+  }, [activeId]);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -48,24 +64,41 @@ export default function SectionWrapper() {
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      modifiers={[restrictToVerticalAxis, restrictToWindowEdges]}
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
         {items.map((item) => (
           <SortableItem
+            activeId={activeId}
             key={item.id}
             id={item.id}
             label={item.label}
             component={item.component}
+            minimise={minimise}
           />
         ))}
       </SortableContext>
+      <DragOverlay className="">
+        {activeId ? (
+          <SortableItem
+            key={activeId.id}
+            id={activeId.id}
+            label={activeId.label}
+            component={activeId.component}
+            minimise={minimise}
+          />
+        ) : null}
+      </DragOverlay>
     </DndContext>
   );
-
+  function handleDragStart(event) {
+    const activeItem = SECTIONS.find((item) => item.id === event.active.id);
+    setActiveId(activeItem);
+  }
   function handleDragEnd(event) {
     const { active, over } = event;
-    console.log({ active, over });
     if (over && active.id !== over.id) {
       setItems((items) => {
         const oldIndex = items.findIndex((obj) => obj.id === active.id);
@@ -73,15 +106,13 @@ export default function SectionWrapper() {
         return arrayMove(items, oldIndex, newIndex);
       });
     }
+    setActiveId(null);
   }
 }
 
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-
-function SortableItem(props) {
+function SortableItem({ id, label, component, activeId, minimise }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: props.id });
+    useSortable({ id: id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -94,34 +125,32 @@ function SortableItem(props) {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
 
-  const reveal = () => setShow(!show);
+  const reveal = () => {
+    setShow(!show);
+  };
   return (
     <div
       ref={setNodeRef}
       style={style}
-      className="p-4 rounded-md my-4 bg-stone-50"
+      className={`rounded-md my-4 bg-white ${
+        activeId?.id === id ? "opacity-50" : ""
+      }`}
     >
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg">{props.label}</p>
-        <div className="flex items-center justify-center gap-2">
+        <p
+          className="font-semibold text-lg w-full p-4 cursor-pointer"
+          onClick={reveal}
+        >
+          {label}
+        </p>
+        <div className="flex items-center justify-center gap-2 p-4">
           <button {...listeners} {...attributes}>
-            <ArrowUpDown className="opacity-5 hover:opacity-40 active:opacity-60" />
-          </button>
-          <button
-            onClick={() => {
-              reveal();
-            }}
-          >
-            <ChevronDown className="opacity-10 hover:opacity-40 active:opacity-60" />
+            <GripVertical className="opacity-5 hover:opacity-40 active:opacity-60" />
           </button>
         </div>
       </div>
-      <div ref={parent}>
-        {show && (
-          <div className="min-h-[300px] flex items-center justify-center">
-            {props.component}
-          </div>
-        )}
+      <div className="" ref={parent}>
+        {show && minimise && <div className="">{component}</div>}
       </div>
     </div>
   );

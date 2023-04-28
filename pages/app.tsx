@@ -9,8 +9,8 @@ const App = () => {
       <div className="max-w-[1400px] m-auto">{/* <Navbar /> */}</div>
       <div className="flex">
         {/* <div>Sidebar</div> */}
-        <div className="grid grid-cols-2 w-full h-screen overflow-auto">
-          <div className="p-10 bg-white overflow-auto">
+        <div className="grid grid-cols-2 w-full h-screen overflow-auto ">
+          <div className="p-10 bg-zinc-50 overflow-auto">
             <SectionWrapper />
           </div>
           <div>Preview</div>
