@@ -17,18 +17,22 @@ import {
 // import { SortableItem } from "./SortableItem";
 import { ArrowUpDown, ChevronDown } from "lucide-react";
 import autoAnimate from "@formkit/auto-animate";
+import Personal from "../Forms/Personal";
 const sections = [
   {
     id: 1,
     label: "Personal Information",
+    component: <Personal />,
   },
   {
     id: 2,
     label: "Education",
+    component: <Personal />,
   },
   {
     id: 3,
     label: "Hobbies",
+    component: <Personal />,
   },
 ];
 export default function SectionWrapper() {
@@ -39,9 +43,6 @@ export default function SectionWrapper() {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
-  //   useEffect(() => {
-  //     console.log(items);
-  //   }, [items]);
 
   return (
     <DndContext
@@ -51,7 +52,12 @@ export default function SectionWrapper() {
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
         {items.map((item) => (
-          <SortableItem key={item.id} id={item.id} label={item.label} />
+          <SortableItem
+            key={item.id}
+            id={item.id}
+            label={item.label}
+            component={item.component}
+          />
         ))}
       </SortableContext>
     </DndContext>
@@ -93,10 +99,10 @@ function SortableItem(props) {
     <div
       ref={setNodeRef}
       style={style}
-      className="p-4 rounded-md my-4 bg-stone-100"
+      className="p-4 rounded-md my-4 bg-stone-50"
     >
       <div className="flex justify-between items-center">
-        <p>{props.label}</p>
+        <p className="font-semibold text-lg">{props.label}</p>
         <div className="flex items-center justify-center gap-2">
           <button {...listeners} {...attributes}>
             <ArrowUpDown className="opacity-5 hover:opacity-40 active:opacity-60" />
@@ -112,9 +118,9 @@ function SortableItem(props) {
       </div>
       <div ref={parent}>
         {show && (
-          <p className="h-[300px] flex items-center justify-center">
-            This is content
-          </p>
+          <div className="min-h-[300px] flex items-center justify-center">
+            {props.component}
+          </div>
         )}
       </div>
     </div>
