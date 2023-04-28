@@ -10,7 +10,7 @@ const App = () => {
       <div className="flex">
         {/* <div>Sidebar</div> */}
         <div className="grid grid-cols-2 w-full h-screen overflow-auto">
-          <div className="p-10 bg-white">
+          <div className="p-10 bg-white overflow-auto">
             <SectionWrapper />
           </div>
           <div>Preview</div>
