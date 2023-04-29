@@ -44,6 +44,7 @@ const SECTIONS = [
 ];
 
 export default function SectionWrapper() {
+  console.log("re-render");
   const [items, setItems] = useState(SECTIONS);
   const [activeId, setActiveId] = useState(null);
   const [minimise, setMinimise] = useState(true);

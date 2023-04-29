@@ -6,7 +6,7 @@ const Navbar = () => {
       <div className="flex items-center gap-10 text-base">
         <div className="text-black flex gap-2 items-center font-bold ">
           <Minimize className="" />
-          <p>Halcyon</p>
+          <p>Resumike</p>
         </div>
 
         <nav className="hidden md:flex items-center justify-center gap-6 text-sm font-[500] text-slate-600">
