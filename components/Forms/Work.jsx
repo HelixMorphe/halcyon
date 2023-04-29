@@ -184,7 +184,7 @@ const App = () => {
         onValueChange={setValue}
       >
         {workExperiences.map((experience, index) => (
-          <AccordionItem value={index.toString()}>
+          <AccordionItem key={index} value={index.toString()}>
             <AccordionTrigger>{experience.name || "Untitled"}</AccordionTrigger>
             <AccordionContent>
               <WorkExperienceForm
