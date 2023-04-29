@@ -1,7 +1,7 @@
 import { LucideGithub } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Button";
 
 const Hero = () => {
   return (

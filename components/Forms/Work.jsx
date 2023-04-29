@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { TypographyMuted } from "../ui/Typography";
