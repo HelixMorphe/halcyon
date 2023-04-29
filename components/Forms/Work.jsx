@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
@@ -140,9 +140,10 @@ const App = () => {
   const initialActiveItems = workExperiences.map((_, index) => `item-${index}`);
   const [activeItems, setActiveItems] = useState(initialActiveItems);
   const [value, setValue] = useState("0");
-
+  useEffect(() => {
+    console.log(workExperiences);
+  }, [workExperiences]);
   const handleChange = (index, experience) => {
-    console.log("Experience data onChange:", experience);
     const updatedWorkExperiences = [...workExperiences];
     updatedWorkExperiences[index] = experience;
     setWorkExperiences(updatedWorkExperiences);
