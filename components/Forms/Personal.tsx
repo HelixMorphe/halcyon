@@ -101,7 +101,6 @@ const Personal = () => {
         <div className="col-span-2">
           <TypographyMuted>Short bio</TypographyMuted>
           <Textarea
-            className="placeholder:text-slate-400"
             placeholder="eg: I am a marketing professional with 5 years' experience, excelling in social media management, known for adaptability and problem-solving."
             value={bio}
             onChange={(e) =>

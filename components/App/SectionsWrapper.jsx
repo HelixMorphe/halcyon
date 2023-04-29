@@ -22,6 +22,7 @@ import {
 import { ArrowUpDown, ChevronDown, GripVertical } from "lucide-react";
 import autoAnimate from "@formkit/auto-animate";
 import Personal from "../Forms/Personal";
+import Work from "../Forms/Work";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -33,8 +34,8 @@ const SECTIONS = [
   },
   {
     id: 2,
-    label: "Education",
-    component: <Personal />,
+    label: "Experience",
+    component: <Work />,
   },
   {
     id: 3,
@@ -145,9 +146,9 @@ function SortableItem({ id, label, component, activeId, minimise }) {
           {label}
         </p>
         <div className="flex items-center justify-center gap-2 py-4 px-8">
-          <button {...listeners} {...attributes}>
+          {/* <button {...listeners} {...attributes}>
             <GripVertical className="opacity-5 hover:opacity-40 active:opacity-60" />
-          </button>
+          </button> */}
         </div>
       </div>
       <div className="" ref={parent}>
