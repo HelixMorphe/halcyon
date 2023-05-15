@@ -134,7 +134,7 @@ function SortableItem({ id, label, component, activeId, minimise }) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`rounded-md my-4 bg-white ${
+      className={`rounded-md my-4 bg-white border ${
         activeId?.id === id ? "opacity-50" : ""
       } ${show ? "shadow-sm" : ""}`}
     >

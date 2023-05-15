@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={`${inter.className}`}>
       <Head>
-        <title>Halcyon</title>
+        <title>fab resume.</title>
       </Head>
       <Component {...pageProps} />
     </div>
