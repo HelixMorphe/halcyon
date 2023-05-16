@@ -8,7 +8,7 @@ const Navbar = ({ variant = "nav" }) => {
           <div className="flex items-center gap-10 text-base">
             <div className="text-black flex gap-2 items-center font-bold ">
               <Minimize className="" />
-              <p>fab resume.</p>
+              <p>fabresume.</p>
             </div>
           </div>
           {/* <div>Button</div> */}
@@ -21,7 +21,7 @@ const Navbar = ({ variant = "nav" }) => {
         <div className="flex items-center gap-10 text-base">
           <div className="text-black flex gap-2 items-center font-bold ">
             <Minimize className="" />
-            <p>fab resume.</p>
+            <p>fabresume.</p>
           </div>
 
           <nav className="hidden md:flex items-center justify-center gap-6 text-sm font-[500] text-slate-600">

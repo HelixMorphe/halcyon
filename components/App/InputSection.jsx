@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { Checkbox } from "../ui/checkbox";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Button";
 const InputSection = () => {
   const data = useResumeStore((state) => state.data);
   const updateField = useResumeStore((state) => state.updateField);
