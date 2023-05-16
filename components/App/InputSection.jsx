@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import useResumeStore from "@/lib/store/resume";
+import { Trash } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 import { Checkbox } from "../ui/checkbox";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/button";
 const InputSection = () => {
   const data = useResumeStore((state) => state.data);
   const updateField = useResumeStore((state) => state.updateField);
@@ -88,7 +101,7 @@ const InputSection = () => {
                 variant={"default"}
                 onClick={addEducation}
               >
-                Add one more
+                {data.education.length > 0 ? "Add one more" : "Add"}
               </Button>
             </div>
           </AccordionContent>
@@ -102,6 +115,7 @@ export default InputSection;
 
 const EducationForm = ({ education, key, index }) => {
   const updateField = useResumeStore((state) => state.updateField);
+  const deleteEducation = useResumeStore((state) => state.deleteEducation);
   const handleChange = (path) => (event) => {
     updateField(path, event.target.value);
   };
@@ -112,9 +126,40 @@ const EducationForm = ({ education, key, index }) => {
   }, [check]);
   return (
     <div className="my-4 rounded-lg  p-3 border">
-      <h2 onClick={() => setOpen((state) => !state)} className="font-semibold">
-        {education.institute || "Untitled"}
-      </h2>
+      <div className="flex item-center justify-between">
+        <h2
+          onClick={() => setOpen((state) => !state)}
+          className="font-semibold  flex-grow"
+        >
+          {education.institute || `Education #${index + 1}`}
+        </h2>
+        <AlertDialog>
+          <AlertDialogTrigger className="" asChild>
+            <Trash
+              className="text-red-300 hover:text-red-500 transition-all duration-300 cursor-pointer"
+              size={18}
+            />
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                details.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => deleteEducation(index)}
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              >
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
       <div
         key={key}
         className={`grid grid-cols-4 gap-4 transition-all duration-500 overflow-hidden ${
