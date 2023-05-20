@@ -22,17 +22,24 @@ import {
 
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/Button";
+import { Textarea } from "../ui/textarea";
 const InputSection = () => {
   const data = useResumeStore((state) => state.data);
   const updateField = useResumeStore((state) => state.updateField);
   const addEducation = useResumeStore((state) => state.addEducation);
+  const addWorkExperience = useResumeStore((state) => state.addWorkExperience);
   const handleChange = (path) => (event) => {
     updateField(path, event.target.value);
   };
   return (
     <div>
-      <Accordion type="single" collapsible className="w-full">
-        <AccordionItem value="item-1">
+      <Accordion
+        defaultValue="basics"
+        type="single"
+        collapsible
+        className="w-full"
+      >
+        <AccordionItem value="basics">
           <AccordionTrigger>
             <h2 className="h2">Personal Information</h2>
           </AccordionTrigger>
@@ -83,7 +90,7 @@ const InputSection = () => {
             </div>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-2">
+        <AccordionItem value="education">
           <AccordionTrigger>
             <h2 className="h2">Education</h2>
           </AccordionTrigger>
@@ -102,6 +109,25 @@ const InputSection = () => {
                 onClick={addEducation}
               >
                 {data.education.length > 0 ? "Add one more" : "Add"}
+              </Button>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="work">
+          <AccordionTrigger>
+            <h2 className="h2">Work Experience</h2>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="">
+              {data.work.map((work, index) => (
+                <WorkExperienceForm work={work} key={index} index={index} />
+              ))}
+              <Button
+                className="w-full"
+                variant={"default"}
+                onClick={addWorkExperience}
+              >
+                {data.work.length > 0 ? "Add one more" : "Add"}
               </Button>
             </div>
           </AccordionContent>
@@ -216,6 +242,107 @@ const EducationForm = ({ education, key, index }) => {
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
             I currently study here.
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const WorkExperienceForm = ({ work, key, index }) => {
+  const updateField = useResumeStore((state) => state.updateField);
+  const deleteWorkExperience = useResumeStore(
+    (state) => state.deleteWorkExperience
+  );
+  const handleChange = (path) => (event) => {
+    updateField(path, event.target.value);
+  };
+  const [open, setOpen] = useState(true);
+  const [check, setCheck] = useState(false);
+  useEffect(() => {
+    console.log(check);
+  }, [check]);
+  return (
+    <div className="my-4 rounded-lg  p-3 border">
+      <div className="flex item-center justify-between">
+        <h2
+          onClick={() => setOpen((state) => !state)}
+          className="font-semibold  flex-grow"
+        >
+          {work.company || `Work Experience #${index + 1}`}
+        </h2>
+        <AlertDialog>
+          <AlertDialogTrigger className="" asChild>
+            <Trash
+              className="text-red-300 hover:text-red-500 transition-all duration-300 cursor-pointer"
+              size={18}
+            />
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                details.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => deleteWorkExperience(index)}
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              >
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
+      <div
+        key={key}
+        className={`grid grid-cols-4 gap-4 transition-all duration-500 overflow-hidden ${
+          open ? "max-h-96 my-4" : "max-h-0 my-0"
+        }`}
+      >
+        <Input
+          value={work.company}
+          onChange={handleChange(["work", index, "company"])}
+          placeholder="Company"
+          className="col-span-4"
+        />
+        <Input
+          value={work.position}
+          onChange={handleChange(["work", index, "position"])}
+          placeholder="Position"
+          className="col-span-4"
+        />
+
+        <Textarea
+          value={work.summary}
+          onChange={handleChange(["work", index, "summary"])}
+          placeholder="Summary"
+          className="col-span-4"
+        />
+        <Input
+          value={work.from}
+          onChange={handleChange(["work", index, "from"])}
+          placeholder="From"
+          className="col-span-2"
+        />
+        <Input
+          disabled={check}
+          value={check ? "current" : work.to}
+          onChange={handleChange(["work", index, "to"])}
+          placeholder="To"
+          className="col-span-2"
+        />
+        <div className="col-span-4 flex items-center justify-start gap-4">
+          <Checkbox onCheckedChange={(e) => setCheck(e)} />
+          <label
+            htmlFor="terms"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            I currently work here.
           </label>
         </div>
       </div>
