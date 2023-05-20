@@ -1,10 +1,7 @@
-import Dashboard from "@/components/Dashboard/Dashboard";
 import Navbar from "@/components/Navbar";
 import React from "react";
-import InputSection from "@/components/App/InputSection";
 import TabSection from "@/components/App/TabSection";
 import GradientBg from "@/components/App/GradientBg";
-// import A4Page from "@/components/Templates/test";
 const App = () => {
   return (
     <div>
