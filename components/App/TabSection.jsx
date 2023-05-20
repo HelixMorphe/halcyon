@@ -31,7 +31,7 @@ export default function TabsDemo() {
           <CardHeader>
             <CardTitle>Templates</CardTitle>
             <CardDescription>
-              Change your password here. After saving, you'll be logged out.
+              Change your password here. After saving, youll be logged out.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
