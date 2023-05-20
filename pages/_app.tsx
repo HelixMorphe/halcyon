@@ -6,13 +6,13 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    // <ClerkProvider {...pageProps}>
-    <div className={`${inter.className}`}>
-      <Head>
-        <title>fab resume.</title>
-      </Head>
-      <Component {...pageProps} />
-    </div>
-    // </ClerkProvider>
+    <ClerkProvider {...pageProps}>
+      <div className={`${inter.className}`}>
+        <Head>
+          <title>fab resume.</title>
+        </Head>
+        <Component {...pageProps} />
+      </div>
+    </ClerkProvider>
   );
 }
