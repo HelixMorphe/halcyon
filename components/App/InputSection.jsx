@@ -44,7 +44,7 @@ const InputSection = () => {
             <h2 className="h2">Personal Information</h2>
           </AccordionTrigger>
           <AccordionContent>
-            <div className="grid grid-cols-4 gap-4 my-4">
+            <div className="grid grid-cols-4 gap-4 my-4 px-1">
               <Input
                 value={data.basics.firstName}
                 onChange={handleChange(["basics", "firstName"])}

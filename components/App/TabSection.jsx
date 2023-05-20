@@ -14,17 +14,13 @@ import InputSection from "./InputSection";
 
 export default function TabsDemo() {
   return (
-    <Tabs defaultValue="compose" className="w-[400px]">
+    <Tabs defaultValue="compose" className="">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="compose">Compose</TabsTrigger>
         <TabsTrigger value="templates">Templates</TabsTrigger>
       </TabsList>
       <TabsContent value="compose">
-        <Card>
-          <CardContent className="space-y-2">
-            <InputSection />
-          </CardContent>
-        </Card>
+        <InputSection />
       </TabsContent>
       <TabsContent value="templates">
         <Card>
