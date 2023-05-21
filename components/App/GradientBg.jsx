@@ -33,7 +33,7 @@ export default function Demo() {
           background: useMotionTemplate`
             radial-gradient(
               200px circle at ${mouseX}px ${mouseY}px,
-              rgba(220,220,220,0.1),
+              rgba(220,220,220,0.2),
               transparent 80%
             )
           `,

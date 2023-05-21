@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-* {
+.alert-dialog-custom {
   font-family: sans-serif;
 }
 @layer base {
@@ -33,7 +33,7 @@
     --destructive: 0 100% 50%;
     --destructive-foreground: 210 40% 98%;
 
-    --ring: 215 20.2% 65.1%;
+    --ring: rgba(1, 150, 237, 0.36);
 
     --radius: 0.5rem;
   }
@@ -111,4 +111,16 @@
   page-break-inside: avoid;
   break-after: always;
   page-break-after: always;
+}
+
+.input-shadow {
+  box-shadow: 0 0 0 1px #e0e0e0, 0 2px 4px 0 rgb(0 0 0 / 7%),
+    0 1px 1.5px 0 rgb(0 0 0 / 5%);
+  border: none;
+  transition: box-shadow 0.08s ease-in, color 0.08s ease-in, filter 50000s;
+  color: hsla(0, 0%, 10%, 0.9);
+}
+.input-shadow:focus {
+  box-shadow: 0 0 0 1px rgb(50 151 211 / 30%), 0 1px 1px 0 rgb(0 0 0 / 7%),
+    0 0 0 4px rgb(50 151 211 / 30%);
 }

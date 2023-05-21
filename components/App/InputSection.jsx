@@ -189,7 +189,7 @@ const EducationForm = ({ education, key, index }) => {
       <div
         key={key}
         className={`grid grid-cols-4 gap-4 transition-all duration-500 overflow-hidden ${
-          open ? "max-h-96 my-4" : "max-h-0 my-0"
+          open ? "max-h-96 my-4 p-1" : "max-h-0 my-0"
         }`}
       >
         <Input
@@ -301,7 +301,7 @@ const WorkExperienceForm = ({ work, key, index }) => {
       <div
         key={key}
         className={`grid grid-cols-4 gap-4 transition-all duration-500 overflow-hidden ${
-          open ? "max-h-96 my-4" : "max-h-0 my-0"
+          open ? "max-h-96 my-4 p-1" : "max-h-0 my-0"
         }`}
       >
         <Input
