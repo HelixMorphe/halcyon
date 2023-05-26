@@ -12,6 +12,33 @@ import {
 import { Download, Send, Share, ZoomIn, ZoomOut } from "lucide-react";
 
 export default function Demo() {
+  const handleDownload = async () => {
+    try {
+      const response = await fetch("/api/generatePDF", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url: "http://localhost:3000/app",
+        }),
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "resume.pdf";
+        a.click();
+        URL.revokeObjectURL(url);
+      } else {
+        console.error("An error occurred while generating the PDF.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
 
@@ -53,7 +80,10 @@ export default function Demo() {
         </div>
         <div className="flex items-center justify-end gap-4">
           <motion.div whileTap={{ scale: 0.8 }}>
-            <Download className="text-[rgba(255,255,255,0.8)] hover:text-white transition-all duration-300 cursor-pointer" />
+            <Download
+              onClick={handleDownload}
+              className="text-[rgba(255,255,255,0.8)] hover:text-white transition-all duration-300 cursor-pointer"
+            />
           </motion.div>
           {/* <motion.div whileTap={{ scale: 0.8 }}>
             <Send className="text-[rgba(255,255,255,0.8)] hover:text-white transition-all duration-300 cursor-pointer" />

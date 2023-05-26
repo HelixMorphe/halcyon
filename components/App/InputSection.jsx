@@ -103,13 +103,11 @@ const InputSection = () => {
                   index={index}
                 />
               ))}
-              <Button
-                className="w-full"
-                variant={"default"}
-                onClick={addEducation}
-              >
-                {data.education.length > 0 ? "Add one more" : "Add"}
-              </Button>
+              <div className="flex w-full items-center justify-end">
+                <Button className="" variant={"default"} onClick={addEducation}>
+                  {data.education.length > 0 ? "Add one more" : "Add"}
+                </Button>
+              </div>
             </div>
           </AccordionContent>
         </AccordionItem>
